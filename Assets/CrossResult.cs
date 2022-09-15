@@ -27,7 +27,7 @@ public class CrossResult : MonoBehaviour
 
     }
 
-    Vector3 CrossProduct(Vector3 firstVector3,Vector3 seconVector3)
+    Vector3 CrossProduct(Vector3 firstVector3,Vector3 seconVector3)//CORRECTO
     {
 
         Vector3 result;
@@ -48,29 +48,30 @@ public class CrossResult : MonoBehaviour
         Gizmos.DrawLine(Vector3.zero, secondVector3 * gizmoLength);
         Gizmos.color = Color.green;                   
         Gizmos.DrawLine(Vector3.zero, thirdVector3.normalized  * gizmoLength);
+        
     }
 
-    private void CalculateArea(Vector3 firstVector3,Vector3 secondVector3,Vector3 thirdVector3)
+    private void CalculateArea(Vector3 firstVector3, Vector3 secondVector3, Vector3 thirdVector3)
     {
         Vector3[] vector = new Vector3[3];
         vector[0] = firstVector3;
         vector[1] = secondVector3;
         vector[2] = thirdVector3;
-        for (int i = 0; i < vector.Length-1; i++)
+        //checkear que esten todos en el mismo plano
+        for (int i = 0; i < vector.Length - 1; i++)
         {
-            for (int j = 0; j <vector.Length-i-1; j++)
+            for (int j = 0; j < vector.Length - i - 1; j++)
             {
-                if (MathF.Abs(vector[j].y) > MathF.Abs(vector[j+1].y))
+                if (MathF.Abs(vector[j].z) > MathF.Abs(vector[j + 1].z))
                 {
                     Vector3 aux = vector[j];
-                    vector[j] = vector[j+1];
+                    vector[j] = vector[j + 1];
                     vector[j] = aux;
                 }
             }
         }
-        //vector[1].x-=
-        //vector[2].x-=
-        
+    
+  //cambiar maginitud y hacer  el corte ahi vector cruze de lineas
 
         firstForce = vector[0] - vector[1];
         secondForce = vector[0] - vector[2];
