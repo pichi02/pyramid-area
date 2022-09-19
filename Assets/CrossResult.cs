@@ -14,6 +14,9 @@ public class CrossResult : MonoBehaviour
     [SerializeField] private Vector3 result2;
     [SerializeField] Vector3 firstForce;
     [SerializeField]Vector3 secondForce  ;
+    [SerializeField] Vector3 firstNormalized;
+    [SerializeField] Vector3 secondNormalized;
+    [SerializeField] Vector3 thirdNormalized;
 
     void Update()
     {
@@ -47,8 +50,26 @@ public class CrossResult : MonoBehaviour
         Gizmos.color = Color.blue;                    
         Gizmos.DrawLine(Vector3.zero, secondVector3 * gizmoLength);
         Gizmos.color = Color.green;                   
-        Gizmos.DrawLine(Vector3.zero, thirdVector3.normalized  * gizmoLength);
-        
+        Gizmos.DrawLine(Vector3.zero, thirdVector3  * gizmoLength);
+        Gizmos.color =Color.yellow;
+        Gizmos.DrawLine(Vector3.zero, firstNormalized);
+        Gizmos.color =Color.black;
+        Gizmos.DrawLine(Vector3.zero, secondNormalized);
+        Gizmos.color =Color.magenta;
+        Gizmos.DrawLine(Vector3.zero, thirdNormalized);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(firstNormalized, secondNormalized);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(secondNormalized, thirdNormalized);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(thirdNormalized, firstNormalized);
+
+
+
+
+
+
+
     }
 
     private void CalculateArea(Vector3 firstVector3, Vector3 secondVector3, Vector3 thirdVector3)
@@ -69,10 +90,15 @@ public class CrossResult : MonoBehaviour
                     vector[j] = aux;
                 }
             }
-        }
-    
-  //cambiar maginitud y hacer  el corte ahi vector cruze de lineas
+        } 
+        //cambiar magnitud y hacer  el corte ahi vector cruze de lineas
 
+        firstNormalized = vector[0].normalized * vector[0].magnitude;
+
+        secondNormalized =vector[1].normalized * vector[0].magnitude;
+         thirdNormalized=   vector[2].normalized * vector[0].magnitude;
+       
+        
         firstForce = vector[0] - vector[1];
         secondForce = vector[0] - vector[2];
         Debug.Log(Vector3.Cross(firstForce,secondForce));
