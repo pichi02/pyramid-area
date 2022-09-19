@@ -155,11 +155,14 @@ MonoBehaviour:
   firstVector3: {x: 3.64, y: 1.23, z: -3.14}
   secondVector3: {x: -1.51, y: -2.02, z: -5.55}
   thirdVector3: {x: 0, y: 0, z: 0}
-  gizmoLength: 3.55
+  gizmoLength: 1
   area: 0
   result2: {x: 0, y: 0, z: 0}
   firstForce: {x: 0, y: 0, z: 0}
   secondForce: {x: 0, y: 0, z: 0}
+  firstNormalized: {x: 0, y: 0, z: 0}
+  secondNormalized: {x: 0, y: 0, z: 0}
+  thirdNormalized: {x: 0, y: 0, z: 0}
 --- !u!4 &567738763
 Transform:
   m_ObjectHideFlags: 0
