@@ -10,10 +10,10 @@ public class CrossResult : MonoBehaviour
     [SerializeField] private Vector3 secondVector3;
     [SerializeField] private Vector3 thirdVector3;
     [SerializeField] float gizmoLength = 4.5f;
-    [SerializeField] float area =0.0f;
+    [SerializeField] float area = 0.0f;
     [SerializeField] private Vector3 result2;
     [SerializeField] Vector3 firstForce;
-    [SerializeField]Vector3 secondForce  ;
+    [SerializeField] Vector3 secondForce;
     [SerializeField] Vector3 firstNormalized;
     [SerializeField] Vector3 secondNormalized;
     [SerializeField] Vector3 thirdNormalized;
@@ -21,16 +21,16 @@ public class CrossResult : MonoBehaviour
     void Update()
     {
         secondVector3 = new Vector3(firstVector3.y, -firstVector3.x, firstVector3.z);
-        thirdVector3 = CrossProduct(firstVector3,secondVector3);
-      
+        thirdVector3 = CrossProduct(firstVector3, secondVector3);
+
         Debug.Log(thirdVector3 == Vector3.Cross(firstVector3, secondVector3));
         Debug.Log(thirdVector3);
         Debug.Log(Vector3.Cross(firstVector3, secondVector3));
-        CalculateArea(firstVector3,secondVector3,thirdVector3);
+        CalculateArea(firstVector3, secondVector3, thirdVector3);
 
     }
 
-    Vector3 CrossProduct(Vector3 firstVector3,Vector3 seconVector3)//CORRECTO
+    Vector3 CrossProduct(Vector3 firstVector3, Vector3 seconVector3)//CORRECTO
     {
 
         Vector3 result;
@@ -41,22 +41,25 @@ public class CrossResult : MonoBehaviour
         result = new Vector3(i, -j, k);
         return result;
     }
-    
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
 
-        Gizmos.DrawLine(Vector3.zero, firstVector3  * gizmoLength);
-        Gizmos.color = Color.blue;                    
+        Gizmos.DrawLine(Vector3.zero, firstVector3 * gizmoLength);
+        Gizmos.color = Color.blue;
         Gizmos.DrawLine(Vector3.zero, secondVector3 * gizmoLength);
-        Gizmos.color = Color.green;                   
-        Gizmos.DrawLine(Vector3.zero, thirdVector3  * gizmoLength);
-        Gizmos.color =Color.yellow;
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(Vector3.zero, thirdVector3 * gizmoLength);
+        Gizmos.color = Color.yellow;
         Gizmos.DrawLine(Vector3.zero, firstNormalized);
-        Gizmos.color =Color.black;
+        Gizmos.color = Color.black;
         Gizmos.DrawLine(Vector3.zero, secondNormalized);
-        Gizmos.color =Color.magenta;
+        Gizmos.color = Color.magenta;
         Gizmos.DrawLine(Vector3.zero, thirdNormalized);
+
+
+        //Piramide
         Gizmos.color = Color.red;
         Gizmos.DrawLine(firstNormalized, secondNormalized);
         Gizmos.color = Color.blue;
@@ -90,22 +93,21 @@ public class CrossResult : MonoBehaviour
                     vector[j] = aux;
                 }
             }
-        } 
-        //cambiar magnitud y hacer  el corte ahi vector cruze de lineas
+        }
+
 
         firstNormalized = vector[0].normalized * vector[0].magnitude;
+        secondNormalized = vector[1].normalized * vector[0].magnitude;
+        thirdNormalized = vector[2].normalized * vector[0].magnitude;
 
-        secondNormalized =vector[1].normalized * vector[0].magnitude;
-         thirdNormalized=   vector[2].normalized * vector[0].magnitude;
-       
-        
+
         firstForce = vector[0] - vector[1];
         secondForce = vector[0] - vector[2];
-        Debug.Log(Vector3.Cross(firstForce,secondForce));
+        Debug.Log(Vector3.Cross(firstForce, secondForce));
         result2 = CrossProduct(firstForce, secondForce);
-        
-         area = (MathF.Sqrt(MathF.Pow(result2.x, 2) + MathF.Pow(result2.y, 2) + MathF.Pow(result2.z, 2)))/2.0f;
-        
+
+        area = (MathF.Sqrt(MathF.Pow(result2.x, 2) + MathF.Pow(result2.y, 2) + MathF.Pow(result2.z, 2))) / 2.0f;
+
     }
 
 }
