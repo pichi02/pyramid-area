@@ -24,9 +24,9 @@ public class CrossResult : MonoBehaviour
         secondVector3 = new Vector3(firstVector3.y, -firstVector3.x, firstVector3.z);
         thirdVector3 = CrossProduct(firstVector3, secondVector3);
 
-        Debug.Log(thirdVector3 == Vector3.Cross(firstVector3, secondVector3));
-        Debug.Log(thirdVector3);
-        Debug.Log(Vector3.Cross(firstVector3, secondVector3));
+        //Debug.Log(thirdVector3 == Vector3.Cross(firstVector3, secondVector3));
+        //Debug.Log(thirdVector3);
+        //Debug.Log(Vector3.Cross(firstVector3, secondVector3));
         CalculateArea(firstVector3, secondVector3, thirdVector3);
 
     }
@@ -143,7 +143,7 @@ public class CrossResult : MonoBehaviour
 
         firstForce = vector[0] - vector[1];
         secondForce = vector[0] - vector[2];
-        Debug.Log(Vector3.Cross(firstForce, secondForce));
+       // Debug.Log(Vector3.Cross(firstForce, secondForce));
         result2 = CrossProduct(firstForce, secondForce);
 
         area = (MathF.Sqrt(MathF.Pow(result2.x, 2) + MathF.Pow(result2.y, 2) + MathF.Pow(result2.z, 2))) / 2.0f;
