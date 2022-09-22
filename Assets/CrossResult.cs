@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using UnityEngine;
+using Plane = System.Numerics.Plane;
 using Vector3 = UnityEngine.Vector3;
 
 public class CrossResult : MonoBehaviour
@@ -81,19 +82,58 @@ public class CrossResult : MonoBehaviour
         vector[0] = firstVector3;
         vector[1] = secondVector3;
         vector[2] = thirdVector3;
-        //checkear que esten todos en el mismo plano
-        for (int i = 0; i < vector.Length - 1; i++)
+
+
+        if ((vector[0].x >= 0 && vector[1].x >= 0 && vector[2].x >= 0) || (vector[0].x < 0 && vector[1].x < 0 & vector[2].x < 0))
         {
-            for (int j = 0; j < vector.Length - i - 1; j++)
+            Debug.Log("Eje x");
+            for (int i = 0; i < vector.Length - 1; i++)
             {
-                if (MathF.Abs(vector[j].z) > MathF.Abs(vector[j + 1].z))
+                for (int j = 0; j < vector.Length - i - 1; j++)
                 {
-                    Vector3 aux = vector[j];
-                    vector[j] = vector[j + 1];
-                    vector[j] = aux;
+                    if (MathF.Abs(vector[j].x) > MathF.Abs(vector[j + 1].x))
+                    {
+                        Vector3 aux = vector[j];
+                        vector[j] = vector[j + 1];
+                        vector[j] = aux;
+                    }
                 }
             }
         }
+        if ((vector[0].y >= 0 && vector[1].y >= 0 && vector[2].y >= 0) || (vector[0].y < 0 && vector[1].y < 0 & vector[2].y < 0))
+        {
+            Debug.Log("Eje Y");
+            for (int i = 0; i < vector.Length - 1; i++)
+            {
+                for (int j = 0; j < vector.Length - i - 1; j++)
+                {
+                    if (MathF.Abs(vector[j].y) > MathF.Abs(vector[j + 1].y))
+                    {
+                        Vector3 aux = vector[j];
+                        vector[j] = vector[j + 1];
+                        vector[j] = aux;
+                    }
+                }
+            }
+        }
+        if ((vector[0].z >= 0 && vector[1].z >= 0 && vector[2].z >= 0) || (vector[0].z < 0 && vector[1].z < 0 & vector[2].z < 0))
+        {
+            Debug.Log("Eje Z");
+            for (int i = 0; i < vector.Length - 1; i++)
+            {
+                for (int j = 0; j < vector.Length - i - 1; j++)
+                {
+                    if (MathF.Abs(vector[j].z) > MathF.Abs(vector[j + 1].z))
+                    {
+                        Vector3 aux = vector[j];
+                        vector[j] = vector[j + 1];
+                        vector[j] = aux;
+                    }
+                }
+            }
+        }
+        //checkear que esten todos en el mismo plano
+       
 
 
         firstNormalized = vector[0].normalized * vector[0].magnitude;
@@ -107,6 +147,7 @@ public class CrossResult : MonoBehaviour
         result2 = CrossProduct(firstForce, secondForce);
 
         area = (MathF.Sqrt(MathF.Pow(result2.x, 2) + MathF.Pow(result2.y, 2) + MathF.Pow(result2.z, 2))) / 2.0f;
+
 
     }
 
