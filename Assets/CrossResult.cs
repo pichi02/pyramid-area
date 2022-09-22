@@ -12,6 +12,7 @@ public class CrossResult : MonoBehaviour
     [SerializeField] private Vector3 thirdVector3;
     [SerializeField] float gizmoLength = 4.5f;
     [SerializeField] float area = 0.0f;
+    [SerializeField] double pyramidSurface = 0;
     [SerializeField] private Vector3 result2;
     [SerializeField] Vector3 firstForce;
     [SerializeField] Vector3 secondForce;
@@ -28,7 +29,6 @@ public class CrossResult : MonoBehaviour
         //Debug.Log(thirdVector3);
         //Debug.Log(Vector3.Cross(firstVector3, secondVector3));
         CalculateArea(firstVector3, secondVector3, thirdVector3);
-
     }
 
     Vector3 CrossProduct(Vector3 firstVector3, Vector3 seconVector3)//CORRECTO
@@ -46,19 +46,18 @@ public class CrossResult : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-
         Gizmos.DrawLine(Vector3.zero, firstVector3 * gizmoLength);
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(Vector3.zero, secondVector3 * gizmoLength);
         Gizmos.color = Color.green;
         Gizmos.DrawLine(Vector3.zero, thirdVector3 * gizmoLength);
+
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(Vector3.zero, firstNormalized);
         Gizmos.color = Color.black;
         Gizmos.DrawLine(Vector3.zero, secondNormalized);
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(Vector3.zero, thirdNormalized);
-
 
         //Piramide
         Gizmos.color = Color.red;
@@ -67,15 +66,9 @@ public class CrossResult : MonoBehaviour
         Gizmos.DrawLine(secondNormalized, thirdNormalized);
         Gizmos.color = Color.green;
         Gizmos.DrawLine(thirdNormalized, firstNormalized);
-
-
-
-
-
-
-
     }
 
+    
     private void CalculateArea(Vector3 firstVector3, Vector3 secondVector3, Vector3 thirdVector3)
     {
         Vector3[] vector = new Vector3[3];
@@ -151,4 +144,13 @@ public class CrossResult : MonoBehaviour
 
     }
 
+    void PyramidSurface(Vector3 normalized1, Vector3 normalized2, Vector3 normalized3)
+    {
+        double x = (normalized1.x + normalized2.x + normalized3.x) / 3;
+        double y = (normalized1.y + normalized2.y + normalized3.y) / 3;
+        double pyramidHeight = Math.Sqrt((x * x) + (y * y));
+
+        pyramidSurface = (pyramidHeight * area) / 3;
+
+    }
 }
