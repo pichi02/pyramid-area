@@ -29,6 +29,7 @@ public class CrossResult : MonoBehaviour
         //Debug.Log(thirdVector3);
         //Debug.Log(Vector3.Cross(firstVector3, secondVector3));
         CalculateArea(firstVector3, secondVector3, thirdVector3);
+        PyramidSurface(firstNormalized, secondNormalized, thirdNormalized);
     }
 
     Vector3 CrossProduct(Vector3 firstVector3, Vector3 seconVector3)//CORRECTO
@@ -61,11 +62,11 @@ public class CrossResult : MonoBehaviour
 
         //Piramide
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(firstNormalized, secondNormalized);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(secondNormalized, thirdNormalized);
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(thirdNormalized, firstNormalized);
+        Gizmos.DrawLine(firstNormalized  , secondNormalized);
+        Gizmos.color = Color.blue;       
+        Gizmos.DrawLine(secondNormalized , thirdNormalized);
+        Gizmos.color = Color.green;      
+        Gizmos.DrawLine(thirdNormalized  , firstNormalized);
     }
 
     
@@ -92,6 +93,9 @@ public class CrossResult : MonoBehaviour
                     }
                 }
             }
+
+            vector[1].x = vector[0].x;
+            vector[2].x = vector[0].x;
         }
         if ((vector[0].y >= 0 && vector[1].y >= 0 && vector[2].y >= 0) || (vector[0].y < 0 && vector[1].y < 0 & vector[2].y < 0))
         {
@@ -108,6 +112,9 @@ public class CrossResult : MonoBehaviour
                     }
                 }
             }
+
+            vector[1].y = vector[0].y;
+            vector[2].y = vector[0].y;
         }
         if ((vector[0].z >= 0 && vector[1].z >= 0 && vector[2].z >= 0) || (vector[0].z < 0 && vector[1].z < 0 & vector[2].z < 0))
         {
@@ -124,14 +131,18 @@ public class CrossResult : MonoBehaviour
                     }
                 }
             }
+
+            vector[1].z = vector[0].z;
+            vector[2].z = vector[0].z;
+
         }
-        //checkear que esten todos en el mismo plano
-       
+                                               //checkear que esten todos en el mismo plano
 
 
-        firstNormalized = vector[0].normalized * vector[0].magnitude;
-        secondNormalized = vector[1].normalized * vector[0].magnitude;
-        thirdNormalized = vector[2].normalized * vector[0].magnitude;
+                                               
+        firstNormalized = vector[0] ;
+        secondNormalized = vector[1];
+        thirdNormalized = vector[2];
 
 
         firstForce = vector[0] - vector[1];
