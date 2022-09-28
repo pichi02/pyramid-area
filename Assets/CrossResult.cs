@@ -19,7 +19,7 @@ public class CrossResult : MonoBehaviour
    [SerializeField] Vector3 firstNormalized;
    [SerializeField] Vector3 secondNormalized;
   [SerializeField] Vector3 thirdNormalized;
-
+  [SerializeField]  double pyramid;
     void Update()
     {
         secondVector3 = new Vector3(firstVector3.y, -firstVector3.x, firstVector3.z);
@@ -29,7 +29,7 @@ public class CrossResult : MonoBehaviour
         //Debug.Log(thirdVector3);
         //Debug.Log(Vector3.Cross(firstVector3, secondVector3));
         CalculateArea(firstVector3, secondVector3, thirdVector3);
-       // PyramidSurface(firstNormalized, secondNormalized, thirdNormalized);
+      pyramid= PyramidSurface(firstNormalized, secondNormalized, thirdNormalized);
     }
 
     Vector3 CrossProduct(Vector3 firstVector3, Vector3 seconVector3)//CORRECTO
@@ -203,14 +203,17 @@ public class CrossResult : MonoBehaviour
         return cut;
     }
     // Sacar area de la piramide - la base((base*altura/2))
-    void PyramidSurface(Vector3 normalized1, Vector3 normalized2, Vector3 normalized3)
+
+    double PyramidSurface(Vector3 normalized1, Vector3 normalized2, Vector3 normalized3)
     {
+
         double x = (normalized1.x + normalized2.x + normalized3.x) / 3;
         double y = (normalized1.y + normalized2.y + normalized3.y) / 3;
-        double pyramidHeight = Math.Sqrt((x * x) + (y * y));
+        double z = (normalized1.z + normalized2.z + normalized3.z) / 3;
+        double pyramidHeight = Math.Sqrt((x * x) + (y * y)+ (z * z));
 
-        pyramidSurface = (pyramidHeight * area) / 3;
 
+        return pyramidHeight;
 
     }
 
