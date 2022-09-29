@@ -1,12 +1,9 @@
 using System;
-using System.Numerics;
 using UnityEngine;
-using Plane = System.Numerics.Plane;
 using Vector3 = UnityEngine.Vector3;
 
 public class CrossResult : MonoBehaviour
 {
-
     [SerializeField] private Vector3 firstVector3;
     [SerializeField] private Vector3 secondVector3;
     [SerializeField] private Vector3 thirdVector3;
@@ -20,7 +17,6 @@ public class CrossResult : MonoBehaviour
     [SerializeField] float gizmoLength = 4.5f;
 
     [SerializeField] double area = 0;
-    [SerializeField] double pyramidSurface = 0;
     [SerializeField] double pyramid;
     void Update()
     {
@@ -32,7 +28,6 @@ public class CrossResult : MonoBehaviour
 
     Vector3 CrossProduct(Vector3 firstVector3, Vector3 seconVector3)//CORRECTO
     {
-
         Vector3 result;
 
         float i = (firstVector3.y * secondVector3.z) - (firstVector3.z * secondVector3.y);
@@ -57,16 +52,7 @@ public class CrossResult : MonoBehaviour
         Gizmos.DrawLine(Vector3.zero, secondNormalized);
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(Vector3.zero, thirdNormalized);
-
-        //Piramide
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawLine(firstNormalized  , secondNormalized);
-        //Gizmos.color = Color.blue;       
-        //Gizmos.DrawLine(secondNormalized , thirdNormalized);
-        //Gizmos.color = Color.green;      
-        //Gizmos.DrawLine(thirdNormalized  , firstNormalized);
     }
-
 
     private void CalculateArea(Vector3 firstVector3, Vector3 secondVector3, Vector3 thirdVector3)
     {
@@ -94,7 +80,6 @@ public class CrossResult : MonoBehaviour
             firstNormalized = vector[0];
             secondNormalized = cutPyramid(vector[0], vector[1], 0);
             thirdNormalized = cutPyramid(vector[0], vector[2], 0);
-
         }
         if ((vector[0].y >= 0 && vector[1].y >= 0 && vector[2].y >= 0) || (vector[0].y < 0 && vector[1].y < 0 & vector[2].y < 0))
         {
@@ -137,22 +122,11 @@ public class CrossResult : MonoBehaviour
             firstNormalized = vector[0];
             secondNormalized = cutPyramid(vector[0], vector[1], 2);
             thirdNormalized = cutPyramid(vector[0], vector[2], 2);
-
-
-
         }
-        //checkear que esten todos en el mismo plano
 
         length = vector[0].magnitude;
-
-        // secondNormalized = pointCutCalculator(Vector3.zero, vector[1],length);
-        // thirdNormalized = pointCutCalculator(Vector3.zero, vector[2], length
-        // Debug.Log(Vector3.Cross(firstForce, secondForce));
         result2 = CrossProduct(firstForce, secondForce);
-
         area = Pythagoras(result2) / 2.0f;
-
-
     }
 
     Vector3 cutPyramid(Vector3 origin, Vector3 toCut, int axis)
@@ -192,26 +166,26 @@ public class CrossResult : MonoBehaviour
 
         return cut;
     }
-    // Sacar area de la piramide - la base((base*altura/2))
 
     double PyramidSurface(Vector3 vector1, Vector3 vector2, Vector3 vector3)
     {
-        double totalSurface = TriangleArea(vector1, vector2) + TriangleArea(vector1, vector3) + TriangleArea(vector3, vector2); 
+        double totalSurface = TriangleArea(vector1, vector2) + TriangleArea(vector1, vector3) + TriangleArea(vector3, vector2);
 
         return totalSurface;
     }
 
     double TriangleArea(Vector3 vector1, Vector3 vector2)
     {
+        //LARGO DE LA BASE DEL TRIANGULO
         double triangleBase = MathF.Sqrt(MathF.Pow(vector2.x - vector1.x, 2) + MathF.Pow(vector2.y - vector1.y, 2) + MathF.Pow(vector2.z - vector1.z, 2));
-        
+        //PUNTO MEDIO ENTRE LOS 2 VECTORES 
         Vector3 middlePoint;
         middlePoint.x = (vector1.x + vector2.x) / 2;
         middlePoint.y = (vector1.y + vector2.y) / 2;
         middlePoint.z = (vector1.z + vector2.z) / 2;
-        
+        //USANDO LA DISTANCIA DEL PUNTO MEDIO AL 0,0 PARA SABER LA ALTURA
         double triangleHeight = Pythagoras(middlePoint);
-
+        //AREA DEL TRIANGULO
         return triangleBase * triangleHeight / 2;
     }
 
