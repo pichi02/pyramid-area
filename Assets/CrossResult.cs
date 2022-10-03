@@ -97,11 +97,9 @@ public class CrossResult : MonoBehaviour
                     }
                 }
             }
-
             firstNormalized = vector[0];
             secondNormalized = cutPyramid(vector[0], vector[1], 1);
             thirdNormalized = cutPyramid(vector[0], vector[2], 1);
-
         }
         if ((vector[0].z >= 0 && vector[1].z >= 0 && vector[2].z >= 0) || (vector[0].z < 0 && vector[1].z < 0 & vector[2].z < 0))
         {
@@ -155,7 +153,6 @@ public class CrossResult : MonoBehaviour
                 cut = new Vector3(newX, origin.y, newZ);
                 break;
             case 2:
-
                 test = MathF.Atan(toCut.z / toCut.y);
                 newY = origin.z / MathF.Tan(test);
                 test3 = MathF.Atan(toCut.z / toCut.x);
